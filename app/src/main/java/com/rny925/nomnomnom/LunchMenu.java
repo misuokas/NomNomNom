@@ -138,7 +138,7 @@ public class LunchMenu implements JSONDownloader.OnJSONDownloadCompleted, MenuIt
         cal.add( Calendar.DAY_OF_YEAR, day );
         Date todayDate = cal.getTime();
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat( "EEEE" );
+        SimpleDateFormat dateFormat = new SimpleDateFormat( "EEE" );
         try
         {
             return dateFormat.format( todayDate );

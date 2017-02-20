@@ -93,7 +93,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter
             return "";
         }
 
-        return mMenu.getCount() < 3 ? mMenu.get( position ).getDay() : mMenu.get( position ).getDay().substring( 0, 3 );
+        return mMenu.get( position ).getDay();
     }
 
     public interface OnPageLoaded
