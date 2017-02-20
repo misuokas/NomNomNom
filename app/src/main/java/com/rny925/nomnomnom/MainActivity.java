@@ -1,10 +1,17 @@
 package com.rny925.nomnomnom;
 
+import android.Manifest;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
+import android.net.ConnectivityManager;
 import android.net.http.HttpResponseCache;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -13,7 +20,7 @@ import android.view.View;
 import java.io.File;
 import java.io.IOException;
 
-public class MainActivity extends AppCompatActivity implements LunchMenu.OnDataUpdated, LunchMenu.OnDataRemoved, SectionsPagerAdapter.OnPageLoaded, PageLoadedListener.OnPageChange
+public class MainActivity extends AppCompatActivity implements LunchMenu.OnDataUpdated, LunchMenu.OnDataRemoved, SectionsPagerAdapter.OnPageLoaded, PageLoadedListener.OnPageChange, ActivityCompat.OnRequestPermissionsResultCallback
 {
     private LunchMenu mMenu = null;
     private SectionsPagerAdapter mSectionsPagerAdapter;
@@ -24,6 +31,19 @@ public class MainActivity extends AppCompatActivity implements LunchMenu.OnDataU
     private boolean mPageLoaded;
     private PageLoadedListener mPageLoadedListener;
     private MediaPlayer mMediaPlayer;
+
+    private static boolean isNetworkAvailable( Context context )
+    {
+        ConnectivityManager conMan = ( ConnectivityManager ) context.getSystemService( Context.CONNECTIVITY_SERVICE );
+        if( conMan.getActiveNetworkInfo() != null && conMan.getActiveNetworkInfo().isConnected() )
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
     @Override
     protected void onStop()
@@ -43,6 +63,22 @@ public class MainActivity extends AppCompatActivity implements LunchMenu.OnDataU
         setContentView( R.layout.activity_main );
         Toolbar toolbar = ( Toolbar ) findViewById( R.id.toolbar );
         setSupportActionBar( toolbar );
+
+
+        if( !isNetworkAvailable( this ) )
+        {
+            AlertDialog.Builder builder = new AlertDialog.Builder( this );
+            builder.setTitle( "Make Lunch Great Again" );
+            builder.setMessage( "Network not available. Exiting." );
+            builder.setPositiveButton( "OK", new DialogInterface.OnClickListener()
+            {
+                public void onClick( DialogInterface dialog, int id )
+                {
+                    finish();
+                }
+            } );
+            builder.show();
+        }
 
         mMediaPlayer = MediaPlayer.create( this, R.raw.audio );
         mUpdateRequested = false;
@@ -79,10 +115,40 @@ public class MainActivity extends AppCompatActivity implements LunchMenu.OnDataU
         }
         else
         {
-            mMenu = new LunchMenu();
-            mMenu.setOnDataUpdatedListener( this );
-            mMenu.setOnDataRemovedListener( this );
-            mMenu.execute();
+            if( ActivityCompat.checkSelfPermission( this, Manifest.permission.INTERNET ) != PackageManager.PERMISSION_GRANTED ||
+                    ActivityCompat.checkSelfPermission( this, Manifest.permission.ACCESS_NETWORK_STATE ) != PackageManager.PERMISSION_GRANTED )
+            {
+                final String[] permission = new String[]{
+                        Manifest.permission.INTERNET,
+                        Manifest.permission.ACCESS_NETWORK_STATE };
+
+                if( ActivityCompat.shouldShowRequestPermissionRationale( this, Manifest.permission.INTERNET ) ||
+                        ActivityCompat.shouldShowRequestPermissionRationale( this, Manifest.permission.ACCESS_NETWORK_STATE ) )
+                {
+                    AlertDialog.Builder builder = new AlertDialog.Builder( this );
+                    builder.setTitle( "Make Lunch Great Again" );
+                    builder.setMessage( "Permission for internet required." );
+                    builder.setPositiveButton( "OK", new DialogInterface.OnClickListener()
+                    {
+                        public void onClick( DialogInterface dialog, int id )
+                        {
+                            ActivityCompat.requestPermissions( MainActivity.this, permission, 10 );
+                        }
+                    } );
+                    builder.show();
+                }
+                else
+                {
+                    ActivityCompat.requestPermissions( this, permission, 10 );
+                }
+            }
+            else
+            {
+                mMenu = new LunchMenu();
+                mMenu.setOnDataUpdatedListener( this );
+                mMenu.setOnDataRemovedListener( this );
+                mMenu.execute();
+            }
         }
 
         FloatingActionButton fab = ( FloatingActionButton ) findViewById( R.id.fab );
@@ -114,7 +180,32 @@ public class MainActivity extends AppCompatActivity implements LunchMenu.OnDataU
         savedInstanceState.putSerializable( "data", mMenu );
     }
 
-    public void OnPageLoaded( )
+    @Override
+    public void onRequestPermissionsResult( int requestCode,
+                                            String permissions[], int[] grantResults )
+    {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch( requestCode )
+        {
+            case 10:
+            {
+                if( grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED )
+                {
+                    mMenu = new LunchMenu();
+                    mMenu.setOnDataUpdatedListener( this );
+                    mMenu.setOnDataRemovedListener( this );
+                    mMenu.execute();
+                }
+                else
+                {
+                    finish();
+                }
+                break;
+            }
+        }
+    }
+
+    public void OnPageLoaded()
     {
         if( mUpdateRequested )
         {

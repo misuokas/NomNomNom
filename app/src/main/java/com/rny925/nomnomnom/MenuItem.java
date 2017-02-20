@@ -174,7 +174,7 @@ public class MenuItem implements JSONDownloader.OnJSONDownloadCompleted, ImageDo
                         mBitmap.getWidth()
                 );
             }
-            mBitmap = mBitmap.createScaledBitmap( mBitmap, 64, 64, true );
+            mBitmap = mBitmap.createScaledBitmap( mBitmap, 96, 96, true );
         }
 
         if( mOnBitmapUpdatedListener != null )

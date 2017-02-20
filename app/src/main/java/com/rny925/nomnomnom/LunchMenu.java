@@ -8,6 +8,7 @@ import org.json.JSONObject;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 public class LunchMenu implements JSONDownloader.OnJSONDownloadCompleted, MenuItem.OnBitmapUpdated, Serializable
@@ -131,60 +132,23 @@ public class LunchMenu implements JSONDownloader.OnJSONDownloadCompleted, MenuIt
         return mMenu.get( position );
     }
 
-    private int getDayNumber()
+    public String getDay( int day )
     {
-        int page = 1;
-        Date todayDate = new Date();
-        SimpleDateFormat dateFormat = new SimpleDateFormat( "u" );
+        Calendar cal = Calendar.getInstance();
+        cal.add( Calendar.DAY_OF_YEAR, day );
+        Date todayDate = cal.getTime();
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat( "EEEE" );
         try
         {
-            String day = dateFormat.format( todayDate );
-            page = Integer.parseInt( day );
+            return dateFormat.format( todayDate );
+
         } catch( Exception e )
         {
             e.printStackTrace();
         }
-        return page - 1;
-    }
 
-    public String getDay( int day )
-    {
-        day += getDayNumber();
-        switch( day )
-        {
-            case 0:
-            {
-                return "Monday";
-            }
-            case 1:
-            {
-                return "Tuesday";
-            }
-            case 2:
-            {
-                return "Wednesday";
-            }
-            case 3:
-            {
-                return "Thursday";
-            }
-            case 4:
-            {
-                return "Friday";
-            }
-            case 5:
-            {
-                return "Saturday";
-            }
-            case 6:
-            {
-                return "Sunday";
-            }
-            default:
-            {
-                return "";
-            }
-        }
+        return "";
     }
 
     private void createNotAvailable()
@@ -250,7 +214,7 @@ public class LunchMenu implements JSONDownloader.OnJSONDownloadCompleted, MenuIt
                 if( mSize != 0 )
                 {
                     mCount++;
-                    mMenu.get( 0 ).get( 0 ).loadBitmap( "http://api.pixplorer.co.uk/image?amount=1&size=tb&word=" + mMenu.get( 0 ).get( 0 ).getContent( 0 ) );
+                    mMenu.get( 0 ).get( 0 ).loadBitmap( "http://api.pixplorer.co.uk/image?amount=1&size=tb&word=" + mMenu.get( 0 ).get( 0 ).getContent( 0 ).replace( " ", "+" ) );
                 }
                 else
                 {
@@ -282,12 +246,12 @@ public class LunchMenu implements JSONDownloader.OnJSONDownloadCompleted, MenuIt
 
             if( ( row + 1 ) < mMenu.get( dayNumber ).getSize() )
             {
-                mMenu.get( dayNumber ).get( row + 1 ).loadBitmap( "http://api.pixplorer.co.uk/image?amount=1&size=tb&word=" + mMenu.get( dayNumber ).get( row + 1 ).getContent( 0 ) );
+                mMenu.get( dayNumber ).get( row + 1 ).loadBitmap( "http://api.pixplorer.co.uk/image?amount=1&size=tb&word=" + mMenu.get( dayNumber ).get( row + 1 ).getContent( 0 ).replace( " ", "+" ) );
             }
             else if( ( dayNumber + 1 ) < mSize )
             {
                 mCount++;
-                mMenu.get( dayNumber + 1 ).get( 0 ).loadBitmap( "http://api.pixplorer.co.uk/image?amount=1&size=tb&word=" + mMenu.get( dayNumber + 1 ).get( 0 ).getContent( 0 ) );
+                mMenu.get( dayNumber + 1 ).get( 0 ).loadBitmap( "http://api.pixplorer.co.uk/image?amount=1&size=tb&word=" + mMenu.get( dayNumber + 1 ).get( 0 ).getContent( 0 ).replace( " ", "+" ) );
             }
 
             mOnDataUpdatedListener.OnDataUpdated( dayNumber, row );
