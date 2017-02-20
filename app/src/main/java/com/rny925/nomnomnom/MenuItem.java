@@ -38,7 +38,7 @@ public class MenuItem implements JSONDownloader.OnJSONDownloadCompleted, ImageDo
         if( mBitmap != null )
         {
             ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
-            boolean success = mBitmap.compress( Bitmap.CompressFormat.JPEG, 100, byteStream );
+            boolean success = mBitmap.compress( Bitmap.CompressFormat.JPEG, 75, byteStream );
             if( success )
             {
                 oos.writeObject( byteStream.toByteArray() );
@@ -174,7 +174,7 @@ public class MenuItem implements JSONDownloader.OnJSONDownloadCompleted, ImageDo
                         mBitmap.getWidth()
                 );
             }
-            mBitmap = mBitmap.createScaledBitmap( mBitmap, 96, 96, true );
+            mBitmap = mBitmap.createScaledBitmap( mBitmap, 128, 128, true );
         }
 
         if( mOnBitmapUpdatedListener != null )

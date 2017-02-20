@@ -2,6 +2,24 @@
 <items version="2" >
 
     <item
+        is-multidex="true"
+        jar="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\exploded-aar\com.android.support\cardview-v7\25.0.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="1108575c7dc7b7f5b378b3290ac90de81a9b8830">
+        <dex dex="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-cardview-v7-25.0.1_2599796abc73c682f45eb64d268b33795b493f22\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\8.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="8e673cdfadd8f2d98fdb2fda2285c30f6e449782">
+        <dex dex="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-basement-8.4.0_dc72c42a797fc2f1b8b364582b9b263d8f821b25\classes.dex" />
+    </item>
+    <item
         is-multidex="false"
         jar="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\exploded-aar\com.android.support\cardview-v7\25.0.1\jars\classes.jar"
         jumboMode="false"
@@ -20,31 +38,31 @@
         <dex dex="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\pre-dexed\release\com.google.android.gms-play-services-appindexing-8.4.0_9b9b0285d8a2189570e404ea6f370939c88e56d2.jar" />
     </item>
     <item
-        is-multidex="false"
-        jar="C:\Users\Mika\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\25.1.1\support-annotations-25.1.1.jar"
+        is-multidex="true"
+        jar="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
         jumboMode="true"
         optimize="true"
         revision="23.0.2"
-        sha1="b59b6ee8d6ecc03e672d253800430343493a6ed8">
-        <dex dex="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\pre-dexed\debug\support-annotations-25.1.1_bf10e9a4b34b8951652f565dd4c3427ad7ed3cb8.jar" />
+        sha1="99eb92cd911f220feff71204f66f2f9a70c40269">
+        <dex dex="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_7bd95fe0c452fe1071b619943efef7e043c9e595\classes.dex" />
     </item>
     <item
-        is-multidex="false"
-        jar="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\exploded-aar\com.android.support\cardview-v7\25.0.1\jars\classes.jar"
+        is-multidex="true"
+        jar="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\25.1.1\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="23.0.2"
-        sha1="1108575c7dc7b7f5b378b3290ac90de81a9b8830">
-        <dex dex="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\pre-dexed\debug\com.android.support-cardview-v7-25.0.1_2599796abc73c682f45eb64d268b33795b493f22.jar" />
+        sha1="0fb891e8f0cfba0513043a7bb357513d229ca2cd">
+        <dex dex="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-utils-25.1.1_183b3e228e302acd253ab4eb3d50115853dd89ee\classes.dex" />
     </item>
     <item
-        is-multidex="false"
-        jar="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\25.1.1\jars\classes.jar"
+        is-multidex="true"
+        jar="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\25.1.1\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="23.0.2"
-        sha1="0d191c1a09e4892d059e5ce749e4ad4e08129e35">
-        <dex dex="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\pre-dexed\debug\com.android.support-animated-vector-drawable-25.1.1_37ae6119f8bfe4ee28884f90374962ae021ffe54.jar" />
+        sha1="ecb496cc08dd52551fc5ec6db3bc0632e95a89bb">
+        <dex dex="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-appcompat-v7-25.1.1_93519b7e156827e936144d4c674d1ae76c7b24f6\classes.dex" />
     </item>
     <item
         is-multidex="false"
@@ -56,31 +74,13 @@
         <dex dex="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\pre-dexed\release\com.android.support-appcompat-v7-25.1.1_93519b7e156827e936144d4c674d1ae76c7b24f6.jar" />
     </item>
     <item
-        is-multidex="false"
-        jar="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\exploded-aar\com.android.support\support-fragment\25.1.1\jars\classes.jar"
+        is-multidex="true"
+        jar="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\25.1.1\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="23.0.2"
-        sha1="e2719c102dca3a7a5b02ce07f769362da6ddb4ab">
-        <dex dex="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\pre-dexed\debug\com.android.support-support-fragment-25.1.1_f0df1721b56b801916dcab2c92a43d52b4216bc0.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.2"
-        sha1="c40d18c8b11ff0ff028aa3297c5b4eabefcd250a">
-        <dex dex="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\pre-dexed\debug\instant-run-bootstrap_7bd95fe0c452fe1071b619943efef7e043c9e595.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\25.1.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.2"
-        sha1="ecb496cc08dd52551fc5ec6db3bc0632e95a89bb">
-        <dex dex="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\pre-dexed\debug\com.android.support-appcompat-v7-25.1.1_93519b7e156827e936144d4c674d1ae76c7b24f6.jar" />
+        sha1="7bde4c34162092e0a77e7f12dc85ed77c484cf5c">
+        <dex dex="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-media-compat-25.1.1_2acea6991d825d8d14a604a441f7a8bf240bbfe5\classes.dex" />
     </item>
     <item
         is-multidex="false"
@@ -101,6 +101,15 @@
         <dex dex="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\pre-dexed\release\com.android.support-transition-25.1.1_b7d87129628725b8d36d7ee23ac6325412d9b470.jar" />
     </item>
     <item
+        is-multidex="true"
+        jar="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\25.1.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="c9649557905bf7a80fca9e0d54cbcb7662627860">
+        <dex dex="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-recyclerview-v7-25.1.1_5ea18520420e64d9f4087a25979c5733881baf89\classes.dex" />
+    </item>
+    <item
         is-multidex="false"
         jar="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\25.1.1\jars\classes.jar"
         jumboMode="false"
@@ -110,13 +119,13 @@
         <dex dex="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\pre-dexed\release\com.android.support-support-media-compat-25.1.1_2acea6991d825d8d14a604a441f7a8bf240bbfe5.jar" />
     </item>
     <item
-        is-multidex="false"
-        jar="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\25.1.1\jars\classes.jar"
+        is-multidex="true"
+        jar="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\exploded-aar\com.android.support\transition\25.1.1\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="23.0.2"
-        sha1="c9649557905bf7a80fca9e0d54cbcb7662627860">
-        <dex dex="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\pre-dexed\debug\com.android.support-recyclerview-v7-25.1.1_5ea18520420e64d9f4087a25979c5733881baf89.jar" />
+        sha1="15b049fedbd8e3926bf99d9e45dfc9b2a1043bb9">
+        <dex dex="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-transition-25.1.1_b7d87129628725b8d36d7ee23ac6325412d9b470\classes.dex" />
     </item>
     <item
         is-multidex="false"
@@ -128,13 +137,13 @@
         <dex dex="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\pre-dexed\release\com.android.support-recyclerview-v7-25.1.1_5ea18520420e64d9f4087a25979c5733881baf89.jar" />
     </item>
     <item
-        is-multidex="false"
-        jar="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\25.1.1\jars\classes.jar"
+        is-multidex="true"
+        jar="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\25.1.1\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="23.0.2"
-        sha1="7bde4c34162092e0a77e7f12dc85ed77c484cf5c">
-        <dex dex="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\pre-dexed\debug\com.android.support-support-media-compat-25.1.1_2acea6991d825d8d14a604a441f7a8bf240bbfe5.jar" />
+        sha1="0d191c1a09e4892d059e5ce749e4ad4e08129e35">
+        <dex dex="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-animated-vector-drawable-25.1.1_37ae6119f8bfe4ee28884f90374962ae021ffe54\classes.dex" />
     </item>
     <item
         is-multidex="false"
@@ -146,22 +155,13 @@
         <dex dex="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\pre-dexed\release\com.android.support-support-core-utils-25.1.1_183b3e228e302acd253ab4eb3d50115853dd89ee.jar" />
     </item>
     <item
-        is-multidex="false"
-        jar="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\25.1.1\jars\classes.jar"
+        is-multidex="true"
+        jar="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\exploded-aar\com.android.support\support-v4\25.1.1\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="23.0.2"
-        sha1="0fb891e8f0cfba0513043a7bb357513d229ca2cd">
-        <dex dex="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\pre-dexed\debug\com.android.support-support-core-utils-25.1.1_183b3e228e302acd253ab4eb3d50115853dd89ee.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\exploded-aar\com.android.support\transition\25.1.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.2"
-        sha1="15b049fedbd8e3926bf99d9e45dfc9b2a1043bb9">
-        <dex dex="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\pre-dexed\debug\com.android.support-transition-25.1.1_b7d87129628725b8d36d7ee23ac6325412d9b470.jar" />
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v4-25.1.1_bce94050cbd274793ef031a3316717c7d89bcbd6\classes.dex" />
     </item>
     <item
         is-multidex="false"
@@ -173,6 +173,24 @@
         <dex dex="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\pre-dexed\release\com.android.support-support-core-ui-25.1.1_eecc8c6487bef5238b1921764a68a8440230e015.jar" />
     </item>
     <item
+        is-multidex="true"
+        jar="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\exploded-aar\com.android.support\support-compat\25.1.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="02741d05d4b697fba5e279e9881aaa1da0ca7c7f">
+        <dex dex="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-compat-25.1.1_a84d95643f7e54267c6b1593ab4988a12eb9b9f3\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\25.1.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="3e04ac8ca644ea7baddf6fdcf72e15c79e9df94a">
+        <dex dex="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-ui-25.1.1_eecc8c6487bef5238b1921764a68a8440230e015\classes.dex" />
+    </item>
+    <item
         is-multidex="false"
         jar="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\exploded-aar\com.android.support\design\25.1.1\jars\classes.jar"
         jumboMode="false"
@@ -182,22 +200,13 @@
         <dex dex="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\pre-dexed\release\com.android.support-design-25.1.1_94c9d289c60226bf5ebe78b488d9794962defa49.jar" />
     </item>
     <item
-        is-multidex="false"
-        jar="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\8.4.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.2"
-        sha1="fef2b3e4b6b1b0e5fe7b69fa137a5fa55a3182ab">
-        <dex dex="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-base-8.4.0_c2b45f3026ef1fcf11a69737c2a05e579f69590f.jar" />
-    </item>
-    <item
-        is-multidex="false"
+        is-multidex="true"
         jar="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\25.1.1\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="23.0.2"
         sha1="c03bf57f358aa10d253f21989e93bcf6014b3b17">
-        <dex dex="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\pre-dexed\debug\com.android.support-support-vector-drawable-25.1.1_d81d91991e48ef2c3574059b071469b53cb4d3f6.jar" />
+        <dex dex="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-vector-drawable-25.1.1_d81d91991e48ef2c3574059b071469b53cb4d3f6\classes.dex" />
     </item>
     <item
         is-multidex="false"
@@ -209,13 +218,22 @@
         <dex dex="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\pre-dexed\release\com.android.support-support-vector-drawable-25.1.1_d81d91991e48ef2c3574059b071469b53cb4d3f6.jar" />
     </item>
     <item
-        is-multidex="false"
-        jar="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\25.1.1\jars\classes.jar"
+        is-multidex="true"
+        jar="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\exploded-aar\com.android.support\design\25.1.1\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="23.0.2"
-        sha1="3e04ac8ca644ea7baddf6fdcf72e15c79e9df94a">
-        <dex dex="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\pre-dexed\debug\com.android.support-support-core-ui-25.1.1_eecc8c6487bef5238b1921764a68a8440230e015.jar" />
+        sha1="cd7951e04cfb9a8bf008d544a478d9a8d8192d38">
+        <dex dex="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-design-25.1.1_94c9d289c60226bf5ebe78b488d9794962defa49\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\8.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="fef2b3e4b6b1b0e5fe7b69fa137a5fa55a3182ab">
+        <dex dex="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-base-8.4.0_c2b45f3026ef1fcf11a69737c2a05e579f69590f\classes.dex" />
     </item>
     <item
         is-multidex="false"
@@ -227,31 +245,13 @@
         <dex dex="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\pre-dexed\release\com.google.android.gms-play-services-base-8.4.0_c2b45f3026ef1fcf11a69737c2a05e579f69590f.jar" />
     </item>
     <item
-        is-multidex="false"
-        jar="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\exploded-aar\com.android.support\design\25.1.1\jars\classes.jar"
+        is-multidex="true"
+        jar="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\exploded-aar\com.android.support\support-fragment\25.1.1\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="23.0.2"
-        sha1="cd7951e04cfb9a8bf008d544a478d9a8d8192d38">
-        <dex dex="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\pre-dexed\debug\com.android.support-design-25.1.1_94c9d289c60226bf5ebe78b488d9794962defa49.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appindexing\8.4.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.2"
-        sha1="65d086ee9daaf87b5af62ad24471edafa433354c">
-        <dex dex="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-appindexing-8.4.0_9b9b0285d8a2189570e404ea6f370939c88e56d2.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.2"
-        sha1="9851063b2802142226ed050251f8be8077965e2e">
-        <dex dex="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\pre-dexed\debug\instant-run_27a028fe9e3c029f83b821b67116c14de0b4bbab.jar" />
+        sha1="e2719c102dca3a7a5b02ce07f769362da6ddb4ab">
+        <dex dex="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-fragment-25.1.1_f0df1721b56b801916dcab2c92a43d52b4216bc0\classes.dex" />
     </item>
     <item
         is-multidex="false"
@@ -263,6 +263,15 @@
         <dex dex="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\pre-dexed\release\com.android.support-support-fragment-25.1.1_f0df1721b56b801916dcab2c92a43d52b4216bc0.jar" />
     </item>
     <item
+        is-multidex="true"
+        jar="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="9cac5b5d0ab50b96cdaf53af2631aac2d8a8fce5">
+        <dex dex="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_27a028fe9e3c029f83b821b67116c14de0b4bbab\classes.dex" />
+    </item>
+    <item
         is-multidex="false"
         jar="C:\Users\Mika\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\25.1.1\support-annotations-25.1.1.jar"
         jumboMode="false"
@@ -270,6 +279,15 @@
         revision="23.0.2"
         sha1="b59b6ee8d6ecc03e672d253800430343493a6ed8">
         <dex dex="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\pre-dexed\release\support-annotations-25.1.1_bf10e9a4b34b8951652f565dd4c3427ad7ed3cb8.jar" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appindexing\8.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.2"
+        sha1="65d086ee9daaf87b5af62ad24471edafa433354c">
+        <dex dex="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-appindexing-8.4.0_9b9b0285d8a2189570e404ea6f370939c88e56d2\classes.dex" />
     </item>
     <item
         is-multidex="false"
@@ -281,22 +299,13 @@
         <dex dex="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\pre-dexed\release\com.android.support-support-compat-25.1.1_a84d95643f7e54267c6b1593ab4988a12eb9b9f3.jar" />
     </item>
     <item
-        is-multidex="false"
-        jar="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\exploded-aar\com.android.support\support-v4\25.1.1\jars\classes.jar"
+        is-multidex="true"
+        jar="C:\Users\Mika\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\25.1.1\support-annotations-25.1.1.jar"
         jumboMode="true"
         optimize="true"
         revision="23.0.2"
-        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
-        <dex dex="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\pre-dexed\debug\com.android.support-support-v4-25.1.1_bce94050cbd274793ef031a3316717c7d89bcbd6.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\8.4.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.2"
-        sha1="8e673cdfadd8f2d98fdb2fda2285c30f6e449782">
-        <dex dex="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-basement-8.4.0_dc72c42a797fc2f1b8b364582b9b263d8f821b25.jar" />
+        sha1="b59b6ee8d6ecc03e672d253800430343493a6ed8">
+        <dex dex="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-25.1.1_bf10e9a4b34b8951652f565dd4c3427ad7ed3cb8\classes.dex" />
     </item>
     <item
         is-multidex="false"
@@ -306,15 +315,6 @@
         revision="23.0.2"
         sha1="8e673cdfadd8f2d98fdb2fda2285c30f6e449782">
         <dex dex="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\pre-dexed\release\com.google.android.gms-play-services-basement-8.4.0_dc72c42a797fc2f1b8b364582b9b263d8f821b25.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\exploded-aar\com.android.support\support-compat\25.1.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="23.0.2"
-        sha1="02741d05d4b697fba5e279e9881aaa1da0ca7c7f">
-        <dex dex="C:\Users\Mika\StudioProjects\NomNomNom3\app\build\intermediates\pre-dexed\debug\com.android.support-support-compat-25.1.1_a84d95643f7e54267c6b1593ab4988a12eb9b9f3.jar" />
     </item>
     <item
         is-multidex="false"
