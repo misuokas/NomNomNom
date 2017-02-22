@@ -36,6 +36,7 @@ public class CardAdapter extends RecyclerView.Adapter< MyViewHolder >
     {
         if( mList != null && mList.get( position ) != null )
         {
+            holder.setPosition( mList.get( position ) );
             holder.getLabelView().setText( mList.get( position ).getTitle() );
             String text = "";
             for( int i = 0; i < mList.get( position ).getContentCount(); i++ )

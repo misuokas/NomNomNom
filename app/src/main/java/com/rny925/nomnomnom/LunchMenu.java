@@ -1,9 +1,5 @@
 package com.rny925.nomnomnom;
 
-import android.content.SharedPreferences;
-import android.media.MediaPlayer;
-import android.preference.PreferenceManager;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -20,7 +16,7 @@ public class LunchMenu implements JSONDownloader.OnJSONDownloadCompleted, MenuIt
     private int mCount;
     private int mSize;
     private int mMenuType;
-    private boolean mSounds;
+    private int mId;
     transient private OnDataUpdated mOnDataUpdatedListener;
     transient private OnDataRemoved mOnDataRemovedListener;
 
@@ -30,9 +26,9 @@ public class LunchMenu implements JSONDownloader.OnJSONDownloadCompleted, MenuIt
         mOnDataUpdatedListener = null;
         mCount = 0;
         mSize = 0;
-        mSounds = false;
         mIsDownloading = false;
         mMenuType = 0;
+        mId = 0;
     }
 
     public int getType()
@@ -40,46 +36,29 @@ public class LunchMenu implements JSONDownloader.OnJSONDownloadCompleted, MenuIt
         return mMenuType;
     }
 
-    public boolean getSounds()
-    {
-        return mSounds;
-    }
-
-    public void setSounds( boolean sounds )
-    {
-        mSounds = sounds;
-    }
-
     private void download()
     {
+        mId++;
         if( mMenuType == 0 )
         {
-            JSONDownloader downloader = new JSONDownloader( "http://www.amica.fi/modules/json/json/Index?costNumber=3498&language=fi&firstDay=" + getDate() );
+            JSONDownloader downloader = new JSONDownloader( "http://www.amica.fi/modules/json/json/Index?costNumber=3498&language=fi&firstDay=" + getDate(), "" );
             downloader.setOnDownloadCompletedListener( this );
             downloader.execute();
         }
         else
         {
-            JSONDownloader downloader = new JSONDownloader( "http://www.sodexo.fi/ruokalistat/output/weekly_json/49/" + getDate2() + "/fi" );
+            JSONDownloader downloader = new JSONDownloader( "http://www.sodexo.fi/ruokalistat/output/weekly_json/49/" + getDate2() + "/fi", "" );
             downloader.setOnDownloadCompletedListener( this );
             downloader.execute();
         }
     }
 
-    public void execute( int menuType, MediaPlayer mediaPlayer )
+    public void execute( int menuType )
     {
-        if( !mIsDownloading )
-        {
-            mIsDownloading = true;
+        mIsDownloading = true;
 
-            if( mSounds && mediaPlayer != null && !mediaPlayer.isPlaying() )
-            {
-                mediaPlayer.start();
-            }
-
-            mMenuType = menuType;
-            download();
-        }
+        mMenuType = menuType;
+        download();
     }
 
     public boolean isDownloading()
@@ -93,36 +72,35 @@ public class LunchMenu implements JSONDownloader.OnJSONDownloadCompleted, MenuIt
         download();
     }
 
-    public void remove( MediaPlayer mediaPlayer )
+    public void remove()
     {
-        if( !mIsDownloading )
+        mIsDownloading = true;
+        mId++;
+
+        if( mMenu != null )
         {
-            mIsDownloading = true;
-
-            if( mSounds && mediaPlayer != null && !mediaPlayer.isPlaying() )
+            int lastDay = mSize;
+            for( int i = 0; i < lastDay; i++ )
             {
-                mediaPlayer.start();
-            }
-
-            if( mMenu != null )
-            {
-                int lastDay = mSize;
-                for( int i = 0; i < lastDay; i++ )
+                int lastTitle = mMenu.get( lastDay - i - 1 ).getSize();
+                for( int j = 0; j < lastTitle; j++ )
                 {
-                    int lastTitle = mMenu.get( lastDay - i - 1 ).getSize();
-                    for( int j = 0; j < lastTitle; j++ )
+                    mMenu.get( lastDay - i - 1 ).del( lastTitle - j - 1 );
+                    mMenu.get( lastDay - i - 1 ).decCount();
+                    if( mOnDataRemovedListener != null )
                     {
-                        mMenu.get( lastDay - i - 1 ).del( lastTitle - j - 1 );
-                        mMenu.get( lastDay - i - 1 ).decCount();
-                        if( mOnDataRemovedListener != null )
-                        {
-                            mOnDataRemovedListener.OnDataRemoved( lastDay - i - 1, lastTitle - j - 1 );
-                        }
+                        mOnDataRemovedListener.OnDataRemoved( lastDay - i - 1, lastTitle - j - 1 );
                     }
-                    mCount--;
-                    mSize--;
-                    mOnDataRemovedListener.OnDataRemoved( lastDay - i - 1, 255 );
                 }
+                if( mCount > 0 )
+                {
+                    mCount--;
+                }
+                if( mSize > 0 )
+                {
+                    mSize--;
+                }
+                mOnDataRemovedListener.OnDataRemoved( lastDay - i - 1, 255 );
             }
         }
     }
@@ -226,9 +204,9 @@ public class LunchMenu implements JSONDownloader.OnJSONDownloadCompleted, MenuIt
     public int getDayNumber()
     {
         Calendar calendar = Calendar.getInstance();
-        int day = calendar.get(Calendar.DAY_OF_WEEK);
+        int day = calendar.get( Calendar.DAY_OF_WEEK );
 
-        switch (day)
+        switch( day )
         {
             case Calendar.MONDAY:
             {
@@ -295,7 +273,7 @@ public class LunchMenu implements JSONDownloader.OnJSONDownloadCompleted, MenuIt
                                 {
                                     item.setContent( components.getString( j ).replaceAll( "\\(.*\\)", "" ).trim() );
                                 }
-                                item.setOnBitmapUpdatedListener( this );
+                                item.setOnBitmapUpdatedListener( this, mId );
                                 list.add( item );
                             }
                             if( k >= mMenu.size() )
@@ -311,7 +289,7 @@ public class LunchMenu implements JSONDownloader.OnJSONDownloadCompleted, MenuIt
                 }
                 else
                 {
-                    String[] GALAKSI_DAYS = {"monday", "tuesday", "wednesday", "thursday", "friday"};
+                    String[] GALAKSI_DAYS = { "monday", "tuesday", "wednesday", "thursday", "friday" };
 
                     JSONObject menus = reader.getJSONObject( "menus" );
 
@@ -331,7 +309,7 @@ public class LunchMenu implements JSONDownloader.OnJSONDownloadCompleted, MenuIt
                                 MenuItem item = new MenuItem( j, i );
                                 item.setTitle( "" );
                                 item.setContent( menu.getString( "title_fi" ).trim() );
-                                item.setOnBitmapUpdatedListener( this );
+                                item.setOnBitmapUpdatedListener( this, mId );
                                 list.add( item );
                             }
 
@@ -374,9 +352,9 @@ public class LunchMenu implements JSONDownloader.OnJSONDownloadCompleted, MenuIt
         }
     }
 
-    public void OnBitmapUpdated( int dayNumber, int row )
+    public void OnBitmapUpdated( int dayNumber, int row, int id )
     {
-        if( mOnDataUpdatedListener != null )
+        if( mOnDataUpdatedListener != null && mId == id )
         {
             mMenu.get( dayNumber ).incCount();
 

@@ -59,7 +59,10 @@ public class MenuList implements Serializable
 
     public void decCount()
     {
-        mCount--;
+        if( mCount > 0 )
+        {
+            mCount--;
+        }
     }
 
     public MenuItem get( int position )

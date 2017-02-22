@@ -2,5 +2,5 @@
     <string name="app_name">Make Lunch Great Again</string>
     <string name="action_smarthouse">Smarthouse</string>
     <string name="action_galaksi">Galaksi</string>
-    <string name="action_soundonoff">Sounds</string>
+    <string name="action_settings">Settings</string>
 </resources>

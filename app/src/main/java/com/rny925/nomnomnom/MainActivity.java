@@ -4,19 +4,24 @@ import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.net.ConnectivityManager;
 import android.net.http.HttpResponseCache;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.*;
+import android.text.Html;
+import android.view.Menu;
+import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
@@ -26,18 +31,21 @@ import android.widget.TextView;
 import java.io.File;
 import java.io.IOException;
 
-public class MainActivity extends AppCompatActivity implements LunchMenu.OnDataUpdated, LunchMenu.OnDataRemoved, SectionsPagerAdapter.OnPageLoaded, PageLoadedListener.OnPageChange, ActivityCompat.OnRequestPermissionsResultCallback
+public class MainActivity extends AppCompatActivity implements LunchMenu.OnDataUpdated, LunchMenu.OnDataRemoved, SectionsPagerAdapter.OnPageLoaded, PageLoadedListener.OnPageChange, ActivityCompat.OnRequestPermissionsResultCallback, Weather.OnWeatherCompleted
 {
     private LunchMenu mMenu = null;
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
-    private boolean mUpdateRequested;
-    private boolean mPageScrollStateChanged;
-    private boolean mPageSelected;
-    private boolean mPageLoaded;
+    private boolean mUpdateRequested = false;
+    private boolean mPageScrollStateChanged = false;
+    private boolean mPageSelected = false;
+    private boolean mPageLoaded = false;
     private PageLoadedListener mPageLoadedListener;
     private MediaPlayer mMediaPlayer;
-    private int mMenuType;
+    private int mMenuType = 0;
+    private boolean mSounds = true;
+    private Weather mWeather = null;
+    private Typeface mWeatherFont = null;
 
     private void disableUpdate()
     {
@@ -72,6 +80,10 @@ public class MainActivity extends AppCompatActivity implements LunchMenu.OnDataU
     protected void onStop()
     {
         super.onStop();
+        if( mMediaPlayer != null )
+        {
+            mMediaPlayer.stop();
+        }
         HttpResponseCache cache = HttpResponseCache.getInstalled();
         if( cache != null )
         {
@@ -79,16 +91,18 @@ public class MainActivity extends AppCompatActivity implements LunchMenu.OnDataU
         }
     }
 
-    private void setMenuTitle( int type )
+    private void setMenuTitle()
     {
-        TextView textView = ( TextView ) findViewById( R.id.section_title );
+        Toolbar toolbar = ( Toolbar ) findViewById( R.id.toolbar );
         if( mMenuType == 0 )
         {
-            textView.setText( "Smarthouse" );
+            toolbar.setTitle( "Smarthouse" );
+            getSupportActionBar().setTitle( "Smarthouse" );
         }
         else
         {
-            textView.setText( "Galaksi" );
+            toolbar.setTitle( "Galaksi" );
+            getSupportActionBar().setTitle( "Galaksi" );
         }
     }
 
@@ -115,8 +129,8 @@ public class MainActivity extends AppCompatActivity implements LunchMenu.OnDataU
             builder.show();
         }
 
+        mWeatherFont = Typeface.createFromAsset( this.getAssets(), "fonts/weather.ttf" );
         mMediaPlayer = MediaPlayer.create( this, R.raw.audio );
-        mMenuType = 0;
         mUpdateRequested = false;
         mPageScrollStateChanged = false;
         mPageSelected = false;
@@ -130,6 +144,16 @@ public class MainActivity extends AppCompatActivity implements LunchMenu.OnDataU
         mViewPager.addOnPageChangeListener( mPageLoadedListener );
         TabLayout tabLayout = ( TabLayout ) findViewById( R.id.tabs );
         tabLayout.setupWithViewPager( mViewPager );
+
+        SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences( getBaseContext() );
+        if( SP.getString( "preferredRestaurant", "0" ).equals( "0" ) )
+        {
+            mMenuType = 0;
+        }
+        else
+        {
+            mMenuType = 1;
+        }
 
         try
         {
@@ -148,19 +172,16 @@ public class MainActivity extends AppCompatActivity implements LunchMenu.OnDataU
             @Override
             public void onClick( View view )
             {
-                if( !mMenu.isDownloading() )
-                {
-                    disableUpdate();
+                disableUpdate();
 
-                    if( mViewPager.getCurrentItem() == 0 )
-                    {
-                        mMenu.remove( mMediaPlayer );
-                    }
-                    else
-                    {
-                        mUpdateRequested = true;
-                        mViewPager.setCurrentItem( 0 );
-                    }
+                if( mViewPager.getCurrentItem() == 0 )
+                {
+                    mMenu.remove();
+                }
+                else
+                {
+                    mUpdateRequested = true;
+                    mViewPager.setCurrentItem( 0 );
                 }
             }
         } );
@@ -170,11 +191,8 @@ public class MainActivity extends AppCompatActivity implements LunchMenu.OnDataU
             mMenu = ( LunchMenu ) savedInstanceState.getSerializable( "data" );
             mMenu.setOnDataUpdatedListener( this );
             mMenu.setOnDataRemovedListener( this );
-            SharedPreferences prefs = getSharedPreferences( "Make Lunch Great Again Settings", MODE_PRIVATE );
-            Boolean sounds = prefs.getBoolean( "Sounds", false );
-            mMenu.setSounds( sounds );
             mMenuType = mMenu.getType();
-            setMenuTitle( mMenuType );
+            setMenuTitle();
             mSectionsPagerAdapter.updateItem( 255, 255, mMenu );
             mSectionsPagerAdapter.notifyDataSetChanged();
 
@@ -182,6 +200,10 @@ public class MainActivity extends AppCompatActivity implements LunchMenu.OnDataU
             {
                 fab.setVisibility( View.VISIBLE );
             }
+
+            mWeather = new Weather();
+            mWeather.setOnWeatherCompletedListener( this );
+            mWeather.execute();
         }
         else
         {
@@ -217,14 +239,30 @@ public class MainActivity extends AppCompatActivity implements LunchMenu.OnDataU
                 mMenu = new LunchMenu();
                 mMenu.setOnDataUpdatedListener( this );
                 mMenu.setOnDataRemovedListener( this );
-                SharedPreferences prefs = getSharedPreferences( "Make Lunch Great Again Settings", MODE_PRIVATE );
-                Boolean sounds = prefs.getBoolean( "Sounds", false );
-                mMenu.setSounds( sounds );
-                setMenuTitle( mMenuType );
+                mSounds = SP.getBoolean( "Sounds", true );
+                if( mSounds && mMediaPlayer != null && !mMediaPlayer.isPlaying() )
+                {
+                    mMediaPlayer.start();
+                }
+                setMenuTitle();
 
-                mMenu.execute( mMenuType, mMediaPlayer );
+                mMenu.execute( mMenuType );
+
+                mWeather = new Weather();
+                mWeather.setOnWeatherCompletedListener( this );
+                mWeather.execute();
             }
         }
+    }
+
+    public void OnWeatherCompleted( String weather )
+    {
+        TextView textView = ( TextView ) findViewById( R.id.section_weather );
+        if( mWeatherFont != null )
+        {
+            textView.setTypeface( mWeatherFont );
+        }
+        textView.setText( Html.fromHtml( weather ) );
     }
 
     @Override
@@ -238,22 +276,29 @@ public class MainActivity extends AppCompatActivity implements LunchMenu.OnDataU
     public void onRequestPermissionsResult( int requestCode,
                                             String permissions[], int[] grantResults )
     {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        super.onRequestPermissionsResult( requestCode, permissions, grantResults );
         switch( requestCode )
         {
             case 10:
             {
                 if( grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED )
                 {
-                    mMenu = new LunchMenu( );
+                    mMenu = new LunchMenu();
                     mMenu.setOnDataUpdatedListener( this );
                     mMenu.setOnDataRemovedListener( this );
-                    SharedPreferences prefs = getSharedPreferences( "Make Lunch Great Again Settings", MODE_PRIVATE );
-                    Boolean sounds = prefs.getBoolean( "Sounds", false );
-                    mMenu.setSounds( sounds );
-                    setMenuTitle( mMenuType );
+                    SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences( getBaseContext() );
+                    mSounds = SP.getBoolean( "Sounds", true );
+                    if( mSounds && mMediaPlayer != null && !mMediaPlayer.isPlaying() )
+                    {
+                        mMediaPlayer.start();
+                    }
+                    setMenuTitle();
 
-                    mMenu.execute( mMenuType, mMediaPlayer );
+                    mMenu.execute( mMenuType );
+
+                    mWeather = new Weather();
+                    mWeather.setOnWeatherCompletedListener( this );
+                    mWeather.execute();
                 }
                 else
                 {
@@ -276,7 +321,7 @@ public class MainActivity extends AppCompatActivity implements LunchMenu.OnDataU
             mPageScrollStateChanged = false;
             mPageSelected = false;
             mPageLoaded = false;
-            mMenu.remove( mMediaPlayer );
+            mMenu.remove();
         }
     }
 
@@ -292,7 +337,7 @@ public class MainActivity extends AppCompatActivity implements LunchMenu.OnDataU
             mPageScrollStateChanged = false;
             mPageSelected = false;
             mPageLoaded = false;
-            mMenu.remove( mMediaPlayer );
+            mMenu.remove();
         }
     }
 
@@ -308,7 +353,7 @@ public class MainActivity extends AppCompatActivity implements LunchMenu.OnDataU
             mPageScrollStateChanged = false;
             mPageSelected = false;
             mPageLoaded = false;
-            mMenu.remove( mMediaPlayer );
+            mMenu.remove();
         }
     }
 
@@ -330,6 +375,8 @@ public class MainActivity extends AppCompatActivity implements LunchMenu.OnDataU
             animation.setRepeatCount( 1 );
 
             fab.setAnimation( animation );
+
+            invalidateOptionsMenu();
         }
     }
 
@@ -340,23 +387,14 @@ public class MainActivity extends AppCompatActivity implements LunchMenu.OnDataU
         if( dayNumber == 0 && row == 255 )
         {
             mMenu.update( mMenuType );
+            mWeather.execute();
         }
     }
 
     @Override
-    public boolean onPrepareOptionsMenu (Menu menu) {
-        if ( mMenu.isDownloading() )
-        {
-            menu.getItem( 0 ).setEnabled( false );
-            menu.getItem( 1 ).setEnabled( false );
-        }
-        else
-        {
-            menu.getItem( 0 ).setEnabled( true );
-            menu.getItem( 1 ).setEnabled( true );
-        }
-        menu.getItem( 2 ).setChecked( mMenu.getSounds() );
-
+    public boolean onPrepareOptionsMenu( Menu menu )
+    {
+        menu.getItem( 2 ).setChecked( mSounds );
         return true;
     }
 
@@ -374,59 +412,45 @@ public class MainActivity extends AppCompatActivity implements LunchMenu.OnDataU
 
         switch( id )
         {
+            case R.id.action_settings:
+            {
+                Intent i = new Intent( this, MyPreferencesActivity.class );
+                startActivity( i );
+                break;
+            }
             case R.id.action_smarthouse:
             {
-                if( !mMenu.isDownloading() )
-                {
-                    disableUpdate();
-                    mMenuType = 0;
-                    setMenuTitle( mMenuType );
+                disableUpdate();
+                mMenuType = 0;
+                setMenuTitle();
 
-                    if( mViewPager.getCurrentItem() == 0 )
-                    {
-                        mMenu.remove( mMediaPlayer );
-                    }
-                    else
-                    {
-                        mUpdateRequested = true;
-                        mViewPager.setCurrentItem( 0 );
-                    }
+                if( mViewPager.getCurrentItem() == 0 )
+                {
+                    mMenu.remove();
+                }
+                else
+                {
+                    mUpdateRequested = true;
+                    mViewPager.setCurrentItem( 0 );
                 }
                 break;
             }
             case R.id.action_galaksi:
             {
-                if( !mMenu.isDownloading() )
-                {
-                    disableUpdate();
-                    mMenuType = 1;
-                    setMenuTitle( mMenuType );
+                disableUpdate();
+                mMenuType = 1;
+                setMenuTitle();
 
-                    if( mViewPager.getCurrentItem() == 0 )
-                    {
-                        mMenu.remove( mMediaPlayer );
-                    }
-                    else
-                    {
-                        mUpdateRequested = true;
-                        mViewPager.setCurrentItem( 0 );
-                    }
-                }
-                break;
-            }
-            case R.id.soundonoff:
-            {
-                if( mMenu.getSounds() )
+                if( mViewPager.getCurrentItem() == 0 )
                 {
-                    mMenu.setSounds( false );
+                    mMenu.remove();
                 }
                 else
                 {
-                    mMenu.setSounds( true );
+                    mUpdateRequested = true;
+                    mViewPager.setCurrentItem( 0 );
                 }
-                SharedPreferences.Editor editor = getSharedPreferences( "Make Lunch Great Again Settings", MODE_PRIVATE ).edit();
-                editor.putBoolean( "Sounds", mMenu.getSounds() );
-                editor.commit();
+                break;
             }
             default:
             {

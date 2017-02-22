@@ -37,6 +37,7 @@ public class PageLoadedListener implements ViewPager.OnPageChangeListener
     public interface OnPageChange
     {
         void OnPageSelected();
+
         void OnPageScrollStateChanged();
     }
 }

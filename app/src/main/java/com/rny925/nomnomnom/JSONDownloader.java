@@ -13,10 +13,12 @@ import java.net.URL;
 public class JSONDownloader extends AsyncTask< String, String, String >
 {
     private String mUrl;
+    private String mKey;
     private OnJSONDownloadCompleted mOnJSONDownloadCompletedListener;
 
-    public JSONDownloader( String url )
+    public JSONDownloader( String url, String key )
     {
+        mKey = key;
         mUrl = url;
         mOnJSONDownloadCompletedListener = null;
     }
@@ -34,6 +36,10 @@ public class JSONDownloader extends AsyncTask< String, String, String >
         {
             URL url = new URL( mUrl );
             HttpURLConnection connection = ( HttpURLConnection ) url.openConnection();
+            if( mKey != "" )
+            {
+                connection.addRequestProperty( "x-api-key", "b71c0b87ecf1857bb4e24557a255df39" );
+            }
             connection.addRequestProperty( "Cache-Control", "max-age=0" );
             connection.setUseCaches( true );
             connection.setConnectTimeout( 60000 );

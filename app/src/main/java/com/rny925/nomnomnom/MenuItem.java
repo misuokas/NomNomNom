@@ -20,6 +20,7 @@ public class MenuItem implements JSONDownloader.OnJSONDownloadCompleted, ImageDo
     private ArrayList< String > mContent;
     private int mDayNumber;
     private int mRow;
+    private int mId;
     transient private OnBitmapUpdated mOnBitmapUpdatedListener;
 
     MenuItem( int dayNumber, int row )
@@ -65,8 +66,9 @@ public class MenuItem implements JSONDownloader.OnJSONDownloadCompleted, ImageDo
         mBitmap = null;
     }
 
-    public void setOnBitmapUpdatedListener( MenuItem.OnBitmapUpdated listener )
+    public void setOnBitmapUpdatedListener( MenuItem.OnBitmapUpdated listener, int id )
     {
+        mId = id;
         mOnBitmapUpdatedListener = listener;
     }
 
@@ -113,7 +115,7 @@ public class MenuItem implements JSONDownloader.OnJSONDownloadCompleted, ImageDo
 
     public void loadBitmap( String url )
     {
-        JSONDownloader downloader = new JSONDownloader( url );
+        JSONDownloader downloader = new JSONDownloader( url, "" );
         downloader.setOnDownloadCompletedListener( this );
         downloader.execute();
     }
@@ -136,14 +138,14 @@ public class MenuItem implements JSONDownloader.OnJSONDownloadCompleted, ImageDo
             {
                 if( mOnBitmapUpdatedListener != null )
                 {
-                    mOnBitmapUpdatedListener.OnBitmapUpdated( mDayNumber, mRow );
+                    mOnBitmapUpdatedListener.OnBitmapUpdated( mDayNumber, mRow, mId );
                 }
             }
         } catch( Exception e )
         {
             if( mOnBitmapUpdatedListener != null )
             {
-                mOnBitmapUpdatedListener.OnBitmapUpdated( mDayNumber, mRow );
+                mOnBitmapUpdatedListener.OnBitmapUpdated( mDayNumber, mRow, mId );
             }
             e.printStackTrace();
         }
@@ -179,12 +181,12 @@ public class MenuItem implements JSONDownloader.OnJSONDownloadCompleted, ImageDo
 
         if( mOnBitmapUpdatedListener != null )
         {
-            mOnBitmapUpdatedListener.OnBitmapUpdated( mDayNumber, mRow );
+            mOnBitmapUpdatedListener.OnBitmapUpdated( mDayNumber, mRow, mId );
         }
     }
 
     public interface OnBitmapUpdated
     {
-        void OnBitmapUpdated( int dayNumber, int row );
+        void OnBitmapUpdated( int dayNumber, int row, int id );
     }
 }
